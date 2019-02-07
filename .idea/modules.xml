@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MailboxGUI.iml" filepath="$PROJECT_DIR$/.idea/modules/MailboxGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MailboxGUI_main.iml" filepath="$PROJECT_DIR$/.idea/modules/MailboxGUI_main.iml" group="MailboxGUI" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MailboxGUI_test.iml" filepath="$PROJECT_DIR$/.idea/modules/MailboxGUI_test.iml" group="MailboxGUI" />
+    </modules>
+  </component>
+</project>
