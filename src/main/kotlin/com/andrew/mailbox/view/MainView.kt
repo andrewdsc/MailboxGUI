@@ -28,7 +28,7 @@ class MainView : View("包裹容量計算") {
         }
         button("按下後計算") {
             action {
-                if (!lengthField.equals("")) {
+                if (!lengthField.text.equals("") and !widthField.text.equals("") and !heightField.text.equals("")) {
                     var result = controller.writeToDb(lengthField.text, widthField.text, heightField.text)
                     resultlabel.text = "計算結果:$result"
                 }
