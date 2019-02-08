@@ -1,0 +1,113 @@
+ piechart("Desktop/Laptop OS Market Share") {
+            data("Windows", 77.62)
+            data("OS X", 9.52)
+            data("Other", 3.06)
+            data("Linux", 1.55)
+            data("Chrome OS", 0.55)
+        }
+
+
+ """ 窗簾式 menu """
+         squeezebox {
+             fold("Customer Editor", expanded = true) {
+                 form {
+                     fieldset("Customer Details") {
+                         field("Name") { textfield() }
+                         field("Password") { textfield() }
+                     }
+                 }
+             }
+             fold("Some other editor", expanded = true) {
+                 stackpane {
+                     label("Nothing here")
+                 }
+             }
+         }
+         """ 窗簾式 menu 可以移除 """
+         squeezebox {
+             fold("Customer Editor", expanded = true, closeable = true) {
+                 form {
+                     fieldset("Customer Details") {
+                         field("Name") { textfield() }
+                         field("Password") { textfield() }
+                     }
+                 }
+             }
+             fold("Some other editor", closeable = true) {
+                 stackpane {
+                     label("Nothing here")
+                 }
+             }
+         }
+
+ menubar {
+            menu("File") {
+                menu("Connect") {
+                    item("Facebook")
+                    item("Twitter")
+                }
+                separator()
+                item("Save","Shortcut+S") {
+                    println("Saving!")
+                }
+                item("Quit","Shortcut+Q") {
+                    println("Quitting!")
+                }
+            }
+        }
+
+
+ button("開啟新視窗") {
+             action {
+                 find<MyFragment>().openModal(stageStyle = StageStyle.UTILITY)
+             }
+         }
+
+ class MyFragment: Fragment() {
+     override val root = form {
+         fieldset("Personal Info") {
+             field("First Name") {
+                 textfield()
+             }
+             field("Last Name") {
+                 textfield()
+             }
+             field("Birthday") {
+                 datepicker()
+             }
+         }
+         fieldset("Contact") {
+             field("Phone") {
+                 textfield()
+             }
+             field("Email") {
+                 textfield()
+             }
+         }
+         button("Commit") {
+             action { println("Wrote to database!")}
+         }
+     }
+ }
+
+ override val root = vbox {
+         inlabel = label("Input"){
+             vboxConstraints{
+                 marginLeft = 20.0
+                 marginTop = 20.0
+                 vGrow = Priority.ALWAYS
+             }
+         }
+         inputField = textfield()
+         button("Commit") {
+             vboxConstraints {
+                 marginBottom = 20.0
+                 vGrow = Priority.ALWAYS
+             }
+             action {
+                 var result = controller.writeToDb(inputField.text)
+                 inputField.clear()
+                 inlabel.text = result
+             }
+         }
+     }
