@@ -6,6 +6,11 @@ import java.io.PrintWriter
 import java.lang.Exception
 import java.net.ServerSocket
 import java.net.Socket
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
+import java.time.temporal.ChronoField
+import java.util.*
 import kotlin.system.exitProcess
 
 
@@ -58,8 +63,10 @@ class Server(port: Int) : ServerSocket(port) {
                 var lpr_text = line.replace("\r\n", "").split("_")
                 if (lpr_text[0] == "2")
                 {
+                    var avi_datatime = convertLocalDatatime(lpr_text[1])
                     val c01:Colors = Colors.BLUE
                     target.sendMessage("${lpr_text[0].toString()}:+$c01")
+
                 }
 
             }
@@ -68,8 +75,15 @@ class Server(port: Int) : ServerSocket(port) {
         fun write(msg: String) {
             writer.println("用户：$msg")
         }
+
+        fun convertLocalDatatime(insertstring: String): LocalDateTime{
+//            val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")
+            val formatter = DateTimeFormatterBuilder().appendPattern("yyyyMMddHHmmss").appendValue(ChronoField.MILLI_OF_SECOND, 3).toFormatter()
+            val datetime_value = LocalDateTime.parse(insertstring, formatter)
+            return datetime_value
+        }
     }
-}
+    }
 
 // 客户端
 class ClientSocket(host: String, port: Int) : Socket(host, port) {
